@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"errors"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v4"
 	"golang-apis-kickstart/internal/config"
@@ -8,6 +9,7 @@ import (
 	"golang-apis-kickstart/internal/dto"
 	"golang-apis-kickstart/internal/models"
 	"golang.org/x/crypto/bcrypt"
+	"gorm.io/gorm"
 	"net/http"
 	"time"
 )
@@ -65,11 +67,18 @@ func Login(c *gin.Context) {
 	}
 
 	var user models.User
-	database.DB.Where("email = ?", authInput.Email).First(&user)
+	result := database.DB.Where("email = ?", authInput.Email).First(&user)
 
-	if len(user.Email) == 0 {
-		c.JSON(400, gin.H{
-			"error": "Invalid email or password",
+	if result.Error != nil {
+		if errors.Is(result.Error, gorm.ErrRecordNotFound) {
+			c.JSON(400, gin.H{
+				"error": "Invalid email or password",
+			})
+			c.Abort()
+			return
+		}
+		c.JSON(500, gin.H{
+			"error": "Internal server error",
 		})
 		c.Abort()
 		return
