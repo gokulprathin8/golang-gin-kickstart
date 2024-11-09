@@ -4,13 +4,14 @@ import (
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/golang-jwt/jwt/v4"
+	"golang-apis-kickstart/internal/config"
 	"net/http"
 	"strings"
 	"time"
 )
 
 // Replace this with your actual secret key
-var jwtSecret = []byte("your-secret-key")
+var jwtSecret = []byte(config.SecretKey)
 
 // CheckAuth middleware for validating JWT token
 func CheckAuth(c *gin.Context) {

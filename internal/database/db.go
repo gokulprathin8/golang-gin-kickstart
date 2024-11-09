@@ -1,12 +1,15 @@
 package database
 
-import "database/sql"
+import (
+	"gorm.io/driver/sqlite"
+	"gorm.io/gorm"
+)
 
-var DB *sql.DB
+var DB *gorm.DB
 
-func init() {
+func Init() {
 	var err error
-	DB, err = sql.Open("sqlite3", "db.sqlite")
+	DB, err = gorm.Open(sqlite.Open("database.db"), &gorm.Config{})
 	if err != nil {
 		panic(map[string]interface{}{
 			"info": "failed to open database",
