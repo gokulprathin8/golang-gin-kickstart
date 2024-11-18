@@ -10,45 +10,48 @@ Golang APIs Kickstart is a starter project for building APIs using Go. It includ
 - **Configuration Management**: Using a custom configuration loader.
 
 ## Project Structure
+```
 .
 ├── README.md
-├── cmd
-│   ├── api
-│   │   └── main.go
-│   └── migrate
-│       └── migrate.go
-├── database.db
 ├── env.sample
 ├── go.mod
 ├── go.sum
+├── database.db
+├── cmd
+│   ├── api
+│   │   └── main.go               # Main entry point for the API server
+│   └── migrate
+│       └── migrate.go            # Database migration script
 ├── internal
-│   ├── config
-│   │   └── config.go
-│   ├── controllers
-│   │   └── users.go
-│   ├── database
-│   │   └── db.go
-│   ├── dto
-│   │   └── authInput.go
-│   ├── middleware
-│   │   └── checkAuth.go
-│   ├── models
-│   │   └── users.go
-│   ├── routes
-│   │   └── main.go
-│   └── templates
-│       ├── layouts
-│       │   └── base.html
-│       ├── pages
-│       │   └── index.html
-│       └── partials
-│           ├── footer.html
-│           └── header.html
+│   ├── config
+│   │   └── config.go             # Configuration management
+│   ├── controllers
+│   │   └── users.go              # User-related API controllers
+│   ├── database
+│   │   └── db.go                 # Database initialization and connection
+│   ├── dto
+│   │   └── authInput.go          # Data Transfer Objects (DTOs)
+│   ├── middleware
+│   │   └── checkAuth.go          # Authentication middleware
+│   ├── models
+│   │   └── users.go              # Database models
+│   ├── routes
+│   │   └── main.go               # API route definitions
+│   └── templates
+│       ├── layouts
+│       │   └── base.html         # Base layout for HTML templates
+│       ├── pages
+│       │   └── index.html        # Main page template
+│       └── partials
+│           ├── footer.html       # Footer partial template
+│           └── header.html       # Header partial template
 ├── scripts
-│   └── generate_html.sh
+│   └── generate_html.sh          # Script for HTML generation
 └── tmp
-    ├── build-errors.log
-    └── main
+    ├── build-errors.log          # Log file for build errors
+    └── main                      # Temporary main build file
+```
+
 
 18 directories, 21 files
 
@@ -102,4 +105,4 @@ Contributions are welcome! Please open an issue or submit a pull request.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. 
