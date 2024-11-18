@@ -143,3 +143,7 @@ fabric.properties
 *.db
 *.env
 .env
+
+# ignore tmp folder
+tmp/main
+tmp/build-errors.log
