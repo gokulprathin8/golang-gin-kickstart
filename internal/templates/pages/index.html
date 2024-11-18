@@ -1,3 +1,14 @@
+{{ define "pages/index.html" }}
+{{ template "base.html" . }}
+{{ end }}
+
 {{ define "content" }}
-    <p>{{.title}}</p>
+<h1>{{ .title }}</h1>
+
+<div class="inline-flex">
+    <p>Switch to Light Mode: &nbsp;</p>
+    <label>
+        <input type="checkbox" value="light" class="toggle theme-controller" />
+    </label>
+</div>
 {{ end }}
