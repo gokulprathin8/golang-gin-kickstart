@@ -1,4 +1,4 @@
-# Golang APIs Kickstart
+# Golang Gin Kickstart
 
 Golang APIs Kickstart is a starter project for building APIs using Go. It includes database initialization, configuration management, and templating for web pages.
 
