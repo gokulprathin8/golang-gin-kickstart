@@ -2,10 +2,13 @@ package main
 
 import (
 	"context"
+	helmet "github.com/danielkov/gin-helmet"
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
+	stats "github.com/semihalev/gin-stats"
 	"golang-apis-kickstart/internal/config"
-	"golang-apis-kickstart/internal/controllers"
 	"golang-apis-kickstart/internal/database"
+	"golang-apis-kickstart/internal/routes"
 	"log"
 	"net/http"
 	"os"
@@ -22,13 +25,20 @@ func init() {
 func main() {
 	router := gin.Default()
 
-	// create a group /v1 and add another group /auth in it
-	v1 := router.Group("/v1")
-	auth := v1.Group("/auth")
+	// setup middlewares
+	router.Use(gin.Logger())
+	router.Use(gin.Recovery())
+	router.Use(helmet.Default())
+	router.Use(cors.New(cors.Config{
+		AllowOrigins:     []string{"*"}, // change this to your domain
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Accept"},
+		ExposeHeaders:    []string{"Content-Length"},
+		AllowCredentials: true,
+	}))
+	router.Use(stats.RequestStats())
 
-	auth.POST("/login", controllers.Login)
-	auth.POST("/register", controllers.CreateUser)
-	//auth.POST("/logout", Logout)
+	routes.SetupRoutes(router)
 
 	srv := &http.Server{
 		Addr:    ":" + config.ServerPort,
