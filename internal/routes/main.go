@@ -11,7 +11,7 @@ import (
 func SetupRoutes(router *gin.Engine) {
 	// load templates
 	workingDir, _ := os.Getwd()
-	templatePath := workingDir + "/internal/templates/*"
+	templatePath := workingDir + "/internal/templates/**/*"
 	router.LoadHTMLGlob(templatePath)
 
 	statsReportRoutes(router)
@@ -37,7 +37,7 @@ func userRoutes(router *gin.Engine) {
 
 func homePage(router *gin.Engine) {
 	router.GET("/", func(c *gin.Context) {
-		c.HTML(http.StatusOK, "index.html", gin.H{
+		c.HTML(http.StatusOK, "pages/index.html", gin.H{
 			"title": "Welcome to Golang APIs Kickstart",
 		})
 	})

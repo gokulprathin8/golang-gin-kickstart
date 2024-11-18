@@ -19,7 +19,13 @@
 </head>
 <body>
 
-<p>{{.title}}</p>
+{{ template "partials/header.html" . }}
+
+<main>
+    {{ block "content" . }}{{ end }}
+</main>
+
+{{ template "partials/footer.html" . }}
 
 </body>
 </html>
